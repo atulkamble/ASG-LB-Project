@@ -54,6 +54,20 @@ http://mylb-257618799.us-east-1.elb.amazonaws.com/
 
 13. Update Template >> It will create new version >> make it default template version
 
+14. deletion 
+
+ec2 instances >> terminate instances
+Target Group >> Deregister instances 
+Delete Load Balancer
+Delete Target Group
+Delete Auto Scaling Group
+Delete Template
+Delete Security Group 
+Delete Keypair
+
+15. Confirm 
+EC2 Console >> 2nd Column >> All 0 
+
 ```
 A practical walkthrough and automation scripts for setting up an **Application Load Balancer (ALB)** with two EC2 web servers, and a separate setup for an **Auto Scaling Group (ASG)** integrated with an ALB — all on AWS using Amazon Linux 2.
 
