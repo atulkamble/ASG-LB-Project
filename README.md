@@ -1,5 +1,60 @@
 # AWS Load Balancer & Auto Scaling Group — Hands-On Project
+```
+AWS ELB-ASG Project
 
+1. default -  vpc - network // check
+2. EC2 Console >> Templates 
+3. Create Template >> webserver >> Description - prod webserver >> OS - Amazon Linux | Default-SG | Default-VPC
+webserver.pem | instance type - t3.micro
+
+Advanced >> User Data
+
+#!/bin/bash
+dnf update -y
+dnf install -y httpd
+systemctl enable --now httpd
+echo "<h1>Webserver: $(hostname)</h1>" > /var/www/html/index.html
+
+Create Template
+
+
+4. Auto Scaling Group >>
+
+Create Auto Scaling Group >> myASG >> Select Template (webserver) >> Next >>
+
+Availability Zones and Subnet >> Select All 
+
+5. Load Balacing
+
+Application Load Balancer - myLB - Internet Facing 
+
+Listener and Routing - Target Group Create - myTargetGroup >> Next
+
+6. Capacity 
+
+desired - 3
+max - 4
+min - 2
+
+7. Target tracking scaling policy >> Average CPU Utilization >> 70 
+
+8. Next >> Next >> Create 
+
+9. Target Group >> Health Check Path >> \index.html
+
+10. EC2 >> Instances >> 3 running 
+
+11. Load Balancer >> Available >> DNS Name >> Copy DNS and paste in Browser 
+
+12. Target Group >> Instances >> Healthy 
+
+Tip: LB >> Security Group >> Inbound >> 80-http, 443-https
+
+http://mylb-257618799.us-east-1.elb.amazonaws.com/
+
+13. Update Template >> It will create new version >> make it default template version
+
+```
 A practical walkthrough and automation scripts for setting up an **Application Load Balancer (ALB)** with two EC2 web servers, and a separate setup for an **Auto Scaling Group (ASG)** integrated with an ALB — all on AWS using Amazon Linux 2.
 
 ---
